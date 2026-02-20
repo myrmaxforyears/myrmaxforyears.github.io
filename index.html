@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Portfolio</title>
+  <title>Dipanshu Sharma</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
@@ -10,34 +10,48 @@
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       background-color: #bec0cf;
-      color: #;
+      color: #222;
       display: flex;
       justify-content: center;
-      align-items: center;
-      height: 100vh;
+      padding: 40px 0;
     }
 
     .container {
       background: white;
       padding: 40px;
-      border-radius: 10px;
+      border-radius: 12px;
       width: 90%;
-      max-width: 600px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      max-width: 700px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
       text-align: center;
     }
 
     h1 {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       font-size: 28px;
     }
 
-    p {
-      color: #555;
-      margin-bottom: 30px;
+    .tagline {
+      font-style: italic;
+      color: #666;
+      margin-bottom: 10px;
     }
 
-    .links a {
+    h5 {
+      margin-top: 5px;
+      margin-bottom: 30px;
+      font-weight: normal;
+      color: #444;
+    }
+
+    h2 {
+      margin-top: 40px;
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    .links a,
+    .products a {
       display: block;
       text-decoration: none;
       color: #222;
@@ -45,15 +59,22 @@
       margin: 10px 0;
       border: 2px solid #666;
       border-radius: 6px;
-      transition: background 0.5s ease;
+      transition: background 0.3s ease;
     }
 
-    .links a:hover {
+    .links a:hover,
+    .products a:hover {
       background-color: #efeff1;
     }
 
+    /* Featured work slightly stronger */
+    .products a {
+      border-color: #222;
+      font-weight: 500;
+    }
+
     footer {
-      margin-top:px;
+      margin-top: 30px;
       font-size: 13px;
       color: #999;
     }
@@ -63,19 +84,29 @@
 <body>
 
   <div class="container">
-    <h1>Dipanshu Sharma (Max)</h1>
-    <i>The reality you seek is not what you imagine.</i>
-    <h5>Music Producer & Composer</h5 >
+    <h1>Dipanshu Sharma</h1>
+    <div class="tagline">The reality you seek is not what you imagine.</div>
+    <h5>Music Producer & Composer</h5>
+
+    <h2>Connect</h2>
 
     <div class="links">
-      <a href="https://github.com/myrmaxforyears" target="_blank">GitHub</a>
-      <a href="https://soundcloud.com/myrmaxforyears" target="_blank">Soundcloud</a>
+      <a href="https://soundcloud.com/myrmaxforyears" target="_blank">SoundCloud</a>
+      <a href="https://www.youtube.com/@myrmaxforyears." target="_blank">YouTube</a>
       <a href="https://www.instagram.com/maxismonochrome" target="_blank">Instagram</a>
-      <a href="dipanshusharma12020@gmail.com">Contact Me</a>
+      <a href="https://github.com/myrmaxforyears" target="_blank">GitHub</a>
+      <a href="mailto:dipanshusharma12020@gmail.com">Contact Me</a>
+    </div>
+
+    <h2>Featured Work</h2>
+
+    <div class="products">
+      <a href="https://soundcloud.com/myrmaxforyears/sets/world-reset-ep-breakstation-release" target="_blank">Stream World Reset EP</a>
+      <a href="https://payhip.com/b/RXhNk" target="_blank">IVORYFRAME x Myrmax Sound Kit</a>
     </div>
 
     <footer>
-      © 2026 myrmaxforyears
+      © 2026 myrmaxforyears.
     </footer>
   </div>
 
