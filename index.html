@@ -8,101 +8,115 @@
 <link rel="shortcut icon" href="favicon.png">
 
 <style>
-  body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #000;
-    color: #fff;
-    text-align: center;
-  }
 
-  /* HERO */
-  .hero {
-    height: 320px;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)),
-                url("banner.png") center/cover no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+/* === CUSTOM FONT === */
+@font-face {
+  font-family: 'MainFont';
+  src: url('font01.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
 
-  .hero h1 {
-    font-size: 32px;
-    letter-spacing: 3px;
-    font-weight: 600;
-  }
+/* BODY */
+body {
+  margin: 0;
+  font-family: 'MainFont', serif;
+  background: #000;
+  color: #fff;
+  text-align: center;
+}
 
-  .container {
-    padding: 40px 20px 60px;
-    max-width: 700px;
-    margin: auto;
-  }
+/* HERO */
+.hero {
+  height: 320px;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)),
+              url("banner.png") center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .tagline {
-    color: #aaa;
-    margin-top: 15px;
-    margin-bottom: 40px;
-    font-size: 14px;
-  }
+.hero h1 {
+  font-size: 35px;
+  letter-spacing: 5px;
+  font-weight: normal;
+}
 
-  .section-title {
-    font-size: 12px;
-    letter-spacing: 2px;
-    color: #666;
-    margin: 40px 0 15px;
-  }
+.container {
+  padding: 40px 20px 60px;
+  max-width: 700px;
+  margin: auto;
+}
 
-  .button {
-    position: relative;
-    overflow: hidden;
-    display: block;
-    width: 90%;
-    max-width: 500px;
-    margin: 12px auto;
-    padding: 14px;
-    background: #111;
-    color: #fff;
-    text-decoration: none;
-    border: 1px solid #333;
-    border-radius: 40px;
-    transition: 0.25s ease;
-  }
+.tagline {
+  color: #aaa;
+  margin-top: 15px;
+  margin-bottom: 40px;
+  font-size: 14px;
+}
 
-  .button:hover {
-    background: #fff;
-    color: #000;
-    border-color: #fff;
-  }
+.section-title {
+  font-size: 15px;
+  letter-spacing: 4px;
+  color: #666;
+  margin: 50px 0 25px;
+}
 
-  /* === REAL TV STATIC OVERLAY === */
+.button {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  width: 90%;
+  max-width: 500px;
+  margin: 12px auto;
+  padding: 14px;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid #333;
+  border-radius: 40px;
+  transition: 0.25s ease;
+}
 
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background: url("static.gif");
-    opacity: 0.02;   /* adjust intensity here */
-    z-index: 998;
-  }
+.button:hover {
+  background: #fff;
+  color: #000;
+  border-color: #fff;
+}
 
-  /* === SCANLINES (6px GAP) === */
+footer {
+  margin-top: 60px;
+  font-size: 12px;
+  color: #444;
+}
 
-  body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    background: repeating-linear-gradient(
-      to bottom,
-      rgba(255,255,255,0.05) 0px,
-      rgba(255,255,255,0.05) 1px,
-      transparent 1px,
-      transparent 4px
-    );
-    opacity: 0.4;
-    z-index: 999;
-  }
+/* === REAL STATIC OVERLAY === */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: url("static.gif");
+  opacity: 0.05;   /* balanced intensity */
+  z-index: 998;
+}
+
+/* === SCANLINES (6px GAP) === */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.05) 0px,
+    rgba(255,255,255,0.05) 1px,
+    transparent 1px,
+    transparent 6px
+  );
+  opacity: 0.25;
+  z-index: 999;
+}
 
 </style>
 </head>
