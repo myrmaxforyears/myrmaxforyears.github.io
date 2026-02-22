@@ -97,7 +97,7 @@ body::before {
   inset: 0;
   pointer-events: none;
   background: url("static.gif");
-  opacity: 0.05;   /* balanced intensity */
+  opacity: 0.05;
   z-index: 998;
 }
 
@@ -116,6 +116,17 @@ body::after {
   );
   opacity: 0.25;
   z-index: 999;
+}
+
+/* === MOBILE HERO FIX === */
+@media (max-width: 768px) {
+
+  .hero h1 {
+    font-size: 24px;
+    letter-spacing: 1px;
+    line-height: 1.2;
+  }
+
 }
 
 </style>
@@ -170,3 +181,4 @@ body::after {
 
 </body>
 </html>
+
