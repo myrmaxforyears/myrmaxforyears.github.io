@@ -295,47 +295,54 @@ let isFading = false;
 const targetVolume = 0.5;
 audio.volume = 0;
 
-function fadeIn() {
-  isFading = true;
-  audio.play();
-
-  let vol = 0;
-  const fade = setInterval(() => {
-    if (vol < targetVolume) {
-      vol += 0.005;
-      audio.volume = vol;
-    } else {
-      clearInterval(fade);
-      isFading = false;
-    }
-  }, 100);
-}
-
-function fadeOut() {
+function fadeTo(target, duration) {
   isFading = true;
 
-  let vol = audio.volume;
-  const fade = setInterval(() => {
-    if (vol > 0) {
-      vol -= 0.008;
-      audio.volume = vol;
+  const startVolume = audio.volume;
+  const startTime = performance.now();
+
+  function step(now) {
+    const progress = Math.min((now - startTime) / duration, 1);
+    audio.volume = startVolume + (target - startVolume) * progress;
+
+    if (progress < 1) {
+      requestAnimationFrame(step);
     } else {
-      audio.pause();
-      clearInterval(fade);
       isFading = false;
+      if (target === 0) audio.pause();
     }
-  }, 100);
+  }
+
+  requestAnimationFrame(step);
 }
 
-toggle.addEventListener("click", () => {
+async function startAudio() {
+  try {
+    await audio.play();
+    fadeTo(targetVolume, 10000);
+    toggle.classList.add("active");
+    isPlaying = true;
+  } catch (e) {
+    isPlaying = false;
+  }
+}
+
+window.addEventListener("load", startAudio);
+
+toggle.addEventListener("click", async () => {
   if (isFading) return;
 
   if (!isPlaying) {
-    fadeIn();
-    toggle.classList.add("active");
-    isPlaying = true;
+    try {
+      await audio.play();
+      fadeTo(targetVolume, 10000);
+      toggle.classList.add("active");
+      isPlaying = true;
+    } catch (e) {
+      return;
+    }
   } else {
-    fadeOut();
+    fadeTo(0, 6000);
     toggle.classList.remove("active");
     isPlaying = false;
   }
@@ -345,3 +352,4 @@ toggle.addEventListener("click", () => {
 
 </body>
 </html>
+
