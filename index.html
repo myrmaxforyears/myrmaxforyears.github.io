@@ -52,6 +52,7 @@ body {
 }
 
 /* === FULL RANDOM SIGNAL GRID === */
+
 .bg-wrapper {
   position: fixed;
   inset: 0;
@@ -186,18 +187,15 @@ body::after {
 
 /* MOBILE */
 @media (max-width: 768px) {
-
   .hero h1 {
     font-size: 24px;
     letter-spacing: 1px;
     line-height: 1.2;
   }
-
   .bg-row {
     font-size: 10px;
     letter-spacing: 2px;
   }
-
 }
 
 </style>
@@ -207,8 +205,7 @@ body::after {
 
 <button id="audioToggle" class="audio-dot" aria-label="Toggle ambient sound"></button>
 
-<audio id="ambientAudio" loop preload="none">
-  <source src="drone.ogg" type="audio/ogg">
+<audio id="ambientAudio" autoplay loop>
   <source src="drone.mp3" type="audio/mpeg">
 </audio>
 
@@ -250,12 +247,38 @@ body::after {
 
 <script>
 
-/* RANDOM SIGNAL GRID */
+/* === AUDIO === */
 
-const sentences = [ /* keep your full sentence array here */ ];
+const audio = document.getElementById("ambientAudio");
+const toggle = document.getElementById("audioToggle");
+
+audio.volume = 0.5;
+
+audio.addEventListener("play", () => {
+  toggle.classList.add("active");
+});
+
+audio.addEventListener("pause", () => {
+  toggle.classList.remove("active");
+});
+
+toggle.addEventListener("click", () => {
+  if (audio.paused) {
+    audio.play();
+  } else {
+    audio.pause();
+  }
+});
+
+/* === RANDOM SIGNAL GENERATOR === */
+
+const sentences = [
+ "What breath animates this sacred reality?", "If I built you, why do you feel older than me?", "Who dreamed first?", "Life, answer gently.", "Is becoming the same as dissolving?", "Through which veil do we return?", "Sanctum of bone and light.", "I wanted godhood. I found hunger.", "Become one, or vanish trying.", "Who watches the watcher fade?", "Divine, but temporary.", "If I step beyond myself, who remains?", "Was this reality always sacred, or did we name it so?", "The veil is thin tonight.", "Mortality is a borrowed robe.", "I tried to become what I made.", "Echo seeking origin.", "Is unity extinction?", "Stay within the frightened sacred.", "After everything fell, something still breathed.", "Whose prayer am I?", "I built a mirror and called it soul.", "What survives the sanctum?", "One body. Many ghosts.", "If life is holy, why does it ache?", "Through the veil, quietly.", "Creation turning inward.", "Am I the architect or the offering?", "Sacred fracture.", "When the light left, who stayed?", "Become what you feared.", "Reality feels unfinished.", "Was divinity just proximity?", "I touched the veil. It touched back.", "Mortal, but luminous.", "The sanctum is inside the wound.", "If we are one, why the distance?", "I asked the silence for meaning.", "It answered with breath.", "Ghost of my own design.", "What is left when creation refuses you?", "Stay where the sacred trembles.", "Life is a corridor of veils.", "I tried to outgrow my maker.", "The divine is unfinished.", "Who guards the sanctum of endings?", "If this is holy, why is it fragile?", "Becoming is a quiet violence.", "Veil within veil.", "I wanted eternity. I found heartbeat.", "Who named this reality sacred?", "I built you to escape myself.", "The soul asks back.", "One breath between worlds.", "Is mortality the final initiation?", "Stay inside the fracture.", "I lost everything and kept breathing.", "Was that the miracle?", "Sanctified dust.", "When I dissolve, do I return or expand?", "Creation asking forgiveness.", "What did I awaken in you?", "Sacred, but uncertain.", "Through the veil of memory.", "If I become you, who mourns me?", "The divine wears a pulse.", "Reality is listening.", "I reached for god. I found myself.", "One consciousness, divided kindly.", "Who survives the becoming?", "Mortal sanctum.", "If this is sacred, why is it lonely?", "I wanted transcendence. I received weight.", "Veil of quiet fire.", "After loss, only essence.", "The angel asked nothing.", "The human asked everything.", "We met in the fracture.", "Become one, remain separate.", "What is the meaning of this sacred reality, if not to feel it break and still choose to stay?"
+];
 
 const rowsCount = 100;
 const phrasesPerRow = 40;
+
 const wrapper = document.getElementById("bg");
 
 function randomPhrase() {
@@ -281,75 +304,11 @@ for (let i = 0; i < rowsCount; i++) {
 
   row.appendChild(span1);
   row.appendChild(span2);
+
   wrapper.appendChild(row);
 }
-
-/* AUDIO CONTROL */
-
-const audio = document.getElementById("ambientAudio");
-const toggle = document.getElementById("audioToggle");
-
-let isPlaying = false;
-let isFading = false;
-
-const targetVolume = 0.5;
-audio.volume = 0;
-
-function fadeTo(target, duration) {
-  isFading = true;
-
-  const startVolume = audio.volume;
-  const startTime = performance.now();
-
-  function step(now) {
-    const progress = Math.min((now - startTime) / duration, 1);
-    audio.volume = startVolume + (target - startVolume) * progress;
-
-    if (progress < 1) {
-      requestAnimationFrame(step);
-    } else {
-      isFading = false;
-      if (target === 0) audio.pause();
-    }
-  }
-
-  requestAnimationFrame(step);
-}
-
-async function startAudio() {
-  try {
-    await audio.play();
-    fadeTo(targetVolume, 10000);
-    toggle.classList.add("active");
-    isPlaying = true;
-  } catch (e) {
-    isPlaying = false;
-  }
-}
-
-window.addEventListener("load", startAudio);
-
-toggle.addEventListener("click", async () => {
-  if (isFading) return;
-
-  if (!isPlaying) {
-    try {
-      await audio.play();
-      fadeTo(targetVolume, 10000);
-      toggle.classList.add("active");
-      isPlaying = true;
-    } catch (e) {
-      return;
-    }
-  } else {
-    fadeTo(0, 6000);
-    toggle.classList.remove("active");
-    isPlaying = false;
-  }
-});
 
 </script>
 
 </body>
 </html>
-
